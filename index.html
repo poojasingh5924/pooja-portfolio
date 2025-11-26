@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pooja Purshottam Singh - Portfolio</title>
+  <!--
+    This portfolio was hand‑crafted to present a cohesive narrative around
+    my work as both a clinician and biomedical engineer.  It emphasises
+    high level themes rather than reproducing résumé bullet points.  The
+    layout is responsive and uses native HTML elements (like <details>
+    and <summary>) for simple interactivity without requiring heavy
+    JavaScript frameworks.  You are encouraged to edit the text, swap
+    images in the `images/` folder and adjust the colours directly in
+    the CSS variables below.  All images referenced here are just
+    placeholders – drop your own files into the images folder keeping
+    the same names to personalise the site.
+  -->
+  <style>
+    :root {
+      --background: #f5f6fa;
+      --primary: #174a7c;
+      --secondary: #2e5c86;
+      --accent-light: #e5eefb;
+      --text-main: #1a1a1a;
+      --text-muted: #555;
+      --card-bg: #ffffff;
+      --border-col: #dfe5f1;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Times New Roman", Times, serif;
+      background: var(--background);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    /* Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-col);
+      z-index: 100;
+    }
+    nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 1.5rem;
+    }
+    nav .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+      color: var(--secondary);
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+    nav .brand .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--primary);
+    }
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 1.2rem;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: var(--secondary);
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    nav ul li a:hover {
+      color: var(--primary);
+    }
+
+    /* Generic section styling */
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+    section h2 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      font-size: 1.6rem;
+      color: var(--secondary);
+    }
+    .section-lead {
+      max-width: 700px;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+      color: var(--text-muted);
+    }
+
+    /* About section */
+    #about {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+    }
+    #about .text {
+      flex: 1 1 340px;
+    }
+    #about h1 {
+      margin-top: 0;
+      font-size: 2.2rem;
+      line-height: 1.2;
+      color: var(--primary);
+    }
+    #about .intro {
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+      color: var(--text-muted);
+    }
+    #about .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    #about .tags span {
+      background: var(--accent-light);
+      color: var(--primary);
+      padding: 0.3rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+    }
+    #about .actions a {
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      margin-right: 0.6rem;
+      display: inline-block;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+    }
+    #about .photo {
+      flex: 0 1 320px;
+    }
+    #about .photo img {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
+
+    /* Projects section */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 16px;
+      border: 1px solid var(--border-col);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+    }
+    .project-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: var(--primary);
+    }
+    .project-card p.summary {
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+    .project-card img.logo {
+      width: 120px;
+      height: auto;
+      margin-bottom: 0.8rem;
+    }
+    .project-card details {
+      margin-top: auto;
+      margin-bottom: 0;
+    }
+    .project-card summary {
+      cursor: pointer;
+      font-weight: bold;
+      color: var(--secondary);
+      outline: none;
+      padding: 0.4rem 0;
+    }
+    .project-card summary:hover {
+      color: var(--primary);
+    }
+    .project-card details[open] summary {
+      margin-bottom: 0.6rem;
+    }
+    .project-card details ul {
+      padding-left: 1.2rem;
+      margin: 0 0 0.6rem 0;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .project-card details img {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--border-col);
+      margin-bottom: 0.4rem;
+    }
+    .project-card details .image-caption {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.6rem;
+    }
+
+    /* Clinical section */
+    .clinical-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    .clinical-text {
+      flex: 1 1 300px;
+    }
+    .clinical-image {
+      flex: 0 1 360px;
+    }
+    .clinical-image img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+      border: 1px solid var(--border-col);
+    }
+
+    /* Skills section */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.4rem;
+    }
+    .skill-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-col);
+      border-radius: 14px;
+      padding: 1rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    }
+    .skill-card h4 {
+      margin-top: 0;
+      font-size: 0.95rem;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.4rem;
+    }
+    .skill-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .skill-card ul li {
+      background: var(--accent-light);
+      border-radius: 999px;
+      padding: 0.3rem 0.6rem;
+      font-size: 0.8rem;
+      color: var(--primary);
+    }
+
+    /* Coursework & certifications */
+    .course-section {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    .course-section .course-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-col);
+      border-radius: 14px;
+      padding: 1rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    }
+    .course-section .course-card h3 {
+      margin-top: 0;
+      font-size: 1rem;
+      color: var(--primary);
+    }
+    .course-section .course-card p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 0.6rem;
+    }
+    .course-section .course-card ul {
+      padding-left: 1.2rem;
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .course-section .course-card ul li {
+      margin-bottom: 0.3rem;
+    }
+
+    /* Contact section */
+    #contact p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+    #contact a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    #contact a:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: var(--card-bg);
+      border-top: 1px solid var(--border-col);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 760px) {
+      #about {
+        flex-direction: column;
+      }
+      .clinical-content {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="brand">
+        <span class="dot"></span>
+        <span>Pooja&nbsp;Purshottam&nbsp;Singh</span>
+      </div>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#clinical">Clinical</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#coursework">Coursework</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- About Me Section -->
+    <section id="about">
+      <div class="text">
+        <h1>Bridging clinical care and device design</h1>
+        <p class="intro">
+          Even during my dental training I was curious about how biomedical devices are developed and what goes on behind the scenes to make them safe and effective.  That curiosity, and a desire to improve the tools I used every day, guided me through years of clinical practice where I organised outreach camps, treated more than 500 patients and learned how small design choices affect real people.
+        </p>
+        <p class="intro">
+          After organising over 20 health camps and managing hundreds of procedures, I realised that designing better devices was just as important as delivering care.  Now, while studying for my M.Eng. at Cornell, I collaborate with engineers and physicians to translate clinical insight into dependable devices.  This portfolio showcases that journey.
+        </p>
+        <div class="tags">
+          <span>Medical device design</span>
+          <span>Risk & reliability</span>
+          <span>Clinical insight</span>
+          <span>CAD & prototyping</span>
+        </div>
+        <div class="actions">
+          <a href="#projects" class="btn-primary">Projects</a>
+          <a href="#coursework" class="btn-outline">Coursework</a>
+          <a href="#clinical" class="btn-outline">Clinical Experience</a>
+          <a href="#contact" class="btn-outline">Contact</a>
+        </div>
+      </div>
+      <div class="photo">
+        <img src="images/profile1.png" alt="Pooja Purshottam Singh portrait placeholder">
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+      <h2>Projects</h2>
+      <p class="section-lead">A snapshot of recent work spanning reliability, biodesign, simulation and custom implants. Click on each card to reveal more detail.</p>
+      <div class="projects">
+        <!-- Insulin pump reliability -->
+        <div class="project-card">
+          <img src="images/insulin_logo.png" class="logo" alt="Insulin reliability logo placeholder">
+          <h3>Insulin infusion pump reliability improvement</h3>
+          <p class="summary">
+            Explored how and why insulin pumps and infusion sets fail by combining process mapping, risk analysis and life data modelling, then translated those insights into reliability improvements.
+          </p>
+          <details>
+            <summary>Learn more</summary>
+            <ul>
+              <li>Documented the complete insulin delivery pathway to identify where faults originate and how they propagate through the system.</li>
+              <li>Used risk analysis to focus design improvements on the most critical components across electronics, mechanics and infusion hardware.</li>
+              <li>Applied life data and Weibull modelling to benchmark baseline performance and quantify the impact of proposed changes.</li>
+              <li>Streamlined investigation and corrective‑action workflows to cut defect rates and shorten troubleshooting cycles.</li>
+            </ul>
+            <img src="images/insulin_process_map.png" alt="Process map placeholder">
+            <p class="image-caption">SIPOC‑style process map used to frame where reliability improvements would have the greatest patient impact.</p>
+            <img src="images/insulin_results.png" alt="Reliability results placeholder">
+            <p class="image-caption">Indicative reliability curves comparing baseline and improved system performance.</p>
+          </details>
+        </div>
+
+        <!-- InfantGuard -->
+        <div class="project-card">
+          <img src="images/infantguard_logo.png" class="logo" alt="InfantGuard logo placeholder">
+          <h3>InfantGuard: GERD-sensing smart pacifier</h3>
+          <p class="summary">
+            Developed a pacifier‑based reflux monitor in collaboration with neonatologists and gastroenterologists at Weill Cornell.  By sampling oesophageal reflux through tiny channels, it offers the first non‑invasive way to detect GERD at the bedside without disturbing feeding routines.
+          </p>
+          <details>
+            <summary>Learn more</summary>
+            <ul>
+              <li>Created a network of microfluidic channels and reservoirs that balances suction‑driven flow with manufacturability and infant comfort.</li>
+              <li>Built and refined prototypes using SLA‑printed, biocompatible resins to resolve issues such as channel collapse and support removal.</li>
+              <li>Planned bench tests that replicate infant suction patterns to validate sampling consistency and minimise cross‑contamination.</li>
+            </ul>
+            <img src="images/infantguard_cad.png" alt="InfantGuard CAD placeholder">
+            <p class="image-caption">CAD rendering showing the pacifier shell and internal channel layout used during design reviews.</p>
+          </details>
+        </div>
+
+        <!-- Biodesign catheter securement project -->
+<div class="project-card">
+  <img src="images/biodesign.png" class="logo" alt="Biodesign project logo placeholder">
+  <h3>Paediatric catheter securement (Biodesign initiative)</h3>
+  <p class="summary">
+    Combined antimicrobial materials and improved securement to tackle CLABSI risk in neonatal care through careful human-factors analysis and risk management.
+  </p>
+          <details>
+            <summary>Learn more</summary>
+            <ul>
+              <li>Mapped workflows across multiple paediatric care settings to identify how accidental dislodgement and improper dressing lead to infection.</li>
+              <li>Explored material choices that offer antimicrobial protection while remaining gentle on fragile skin.</li>
+              <li>Defined verification requirements such as tensile strength, biocompatibility and application time to ensure both secure attachment and ease of use.</li>
+              <li>Balanced infection control and usability criteria to reduce risk priority numbers and move toward an integrated securement and antimicrobial solution.</li>
+            </ul>
+            <img src="images/biodesign1.png"
+                  class="section-image"
+                  alt="Biodesign extra image"
+                  style="margin-top: 10px;">
+          </details>
+        </div>
+
+        <!-- Top Gun surgical simulation -->
+        <div class="project-card">
+          <h3>Top Gun surgical simulation</h3>
+          <p class="summary">
+            Helped optimise laparoscopic training modules to better mirror operating‑room constraints, supporting surgeons in honing instrument handling and workflow awareness.
+          </p>
+          <details>
+            <summary>Learn more</summary>
+            <ul>
+              <li>Worked with surgical teams to translate procedures into realistic tasks, port placements and instrument paths for laparoscopic practice.</li>
+              <li>Refined simulator components to improve durability and provide more accurate tactile feedback.</li>
+              <li>Gathered feedback from trainees to improve ergonomics, adjust difficulty curves and enhance scoring mechanisms.</li>
+            </ul>
+            <img src="images/topgun_sim.png" alt="Top Gun simulation placeholder">
+      
+          </details>
+        </div>
+
+        <!-- Mucormycosis implant project -->
+        <div class="project-card">
+          <h3>Patient‑specific implants for mucormycosis rehabilitation</h3>
+          <p class="summary">
+            Collaborated with the oral surgery department at Karnavati University to develop customised craniofacial implants from high‑resolution imaging, improving anatomical fit for patients recovering from mucormycosis.
+          </p>
+          <details>
+            <summary>Learn more</summary>
+            <ul>
+              <li>Generated detailed craniofacial models from CBCT data and incorporated surgeon‑defined constraints into the design.</li>
+              <li>Iterated designs with surgical teams to enhance fit accuracy and ensure implants could be placed safely and efficiently.</li>
+              <li>Established manufacturability and tolerance specifications consistent with ISO 13485 and documented regulatory requirements for custom Class I devices.</li>
+            </ul>
+            <img src="images/mucor_implant.png" alt="Mucormycosis implant placeholder">
+            <p class="image-caption">Stylised representation of a cranial implant region for post‑mucormycosis reconstruction.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Clinical Section -->
+    <section id="clinical">
+      <h2>Clinical experience</h2>
+      <p class="section-lead">Direct clinical exposure informs every design decision. Understanding how devices are used and misused helps translate engineering rigour into real-world reliability.</p>
+      <div class="clinical-content">
+        <div class="clinical-text">
+          <p>
+            As part of my orthopaedic preceptorship at <a href="https://www.guthrie.org" target="_blank">Guthrie Robert Packer Hospital</a>, I observed a variety of orthopaedic, spinal and cranio‑maxillofacial surgeries.  The exposure to different specialties revealed workflow bottlenecks, instrument handling patterns and sterile‑field constraints that feed back into my risk analyses and usability assessments.
+          </p>
+          <p>
+            During my dental training and practice at <a href="https://ksd.ac.in" target="_blank">Karnavati School of Dentistry</a> and in private clinics, I performed surgical extractions, restorative treatments and imaging studies under strict infection‑control protocols.  I cared for more than 500 patients and organised over 20 health camps for underserved communities.  These experiences taught me that even simple tools must withstand real‑world pressures—an insight I carry forward into device development.
+          </p>
+        </div>
+        <div class="clinical-image">
+          <img src="images/clinical_photo.jpg" alt="Clinical environment placeholder">
+          <p class="image-caption">Clinical settings where device reliability and usability are put to the test.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+      <h2>Skills</h2>
+      <p class="section-lead">A combination of design controls, risk management and hands‑on prototyping underpin my approach to solving medical device problems.</p>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h4>Quality &amp; risk</h4>
+          <ul>
+            <li>Design controls &amp; traceability</li>
+            <li>ISO 14971 risk analysis</li>
+            <li>FMEA (dFMEA &amp; pFMEA)</li>
+            <li>CAPA fundamentals</li>
+            <li>Inspection criteria development</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <h4>Validation &amp; process</h4>
+          <ul>
+            <li>IQ/OQ/PQ methodologies</li>
+            <li>Process mapping &amp; SIPOC</li>
+            <li>Test method development</li>
+            <li>Gauge R&amp;R &amp; TMV</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <h4>Statistics &amp; reliability</h4>
+          <ul>
+            <li>Weibull &amp; life‑data modelling</li>
+            <li>Control charts &amp; SPC</li>
+            <li>Pareto &amp; root‑cause tools</li>
+            <li>R, Python &amp; Minitab</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <h4>CAD &amp; prototyping</h4>
+          <ul>
+            <li>SolidWorks &amp; Fusion 360</li>
+            <li>Microfluidic design</li>
+            <li>SLA printing &amp; bench testing</li>
+            <li>Tolerance &amp; GD&amp;T fundamentals</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Coursework & Certifications Section -->
+    <section id="coursework">
+      <h2>Coursework &amp; certifications</h2>
+      <p class="section-lead">Formal study provides the theoretical backbone for my practical work.  Below is a sampling of courses and training that shape my approach to device development.</p>
+      <div class="course-section">
+        <div class="course-card">
+          <h3>Bachelor of Dental Surgery (B.D.S.)</h3>
+          <p>A rigorous five‑year program that laid a solid foundation in medical and dental sciences and clinical practice.</p>
+          <ul>
+            <li><strong>Core sciences:</strong> anatomy, physiology, biochemistry, pathology, microbiology and pharmacology</li>
+            <li><strong>Foundations:</strong> dental anatomy, oral histology and dental materials</li>
+            <li><strong>Clinical practice:</strong> oral surgery, conservative dentistry, prosthodontics, orthodontics, periodontology, paediatric dentistry, public health dentistry, oral medicine and radiology</li>
+          </ul>
+        </div>
+        <div class="course-card">
+          <h3>Master of Engineering in Biomedical Engineering</h3>
+          <p>An interdisciplinary graduate degree at Cornell focused on translating ideas into devices that improve patient care.</p>
+          <ul>
+            <li>Innovation &amp; design in biomedical technology</li>
+            <li>Systems Engineering &amp; Six Sigma </li>
+            <li>Clinical preceptorship at Guthrie Hospital</li>
+            <li>Systems mechanobiology &amp; tissue engineering</li>
+            <li>Cancer and immuno‑engineering</li>
+            <li>Design project </li>  
+            <li>Entrepreneurial Management</li>
+            <li>Bioethics &amp; mediation </li>
+          </ul>
+        </div>
+        <div class="course-card">
+          <h3>Certifications &amp; training</h3>
+          <p>Supplemental learning that complements formal coursework.</p>
+          <ul>
+            <li>Six Sigma belt training (Cornell University)</li>
+            <li>Professional AutoCAD certificate</li>
+            <li>SolidWorks professional licence</li>
+            <li>Licensed dentist (India)</li>
+            <li>Workshops in SLA and resin printing on Formlabs and Stratasys platforms</li>
+            <li>Training in multimedia printing and both additive and subtractive manufacturing techniques</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>If you’d like to discuss collaborations, explore these projects in more depth or simply connect, feel free to reach out.</p>
+      <p>Email: <a href="mailto:ps2258@cornell.edu">ps2258@cornell.edu</a></p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/dr-pooja-singh-b-d-s-831210238/" target="_blank">linkedin.com/in/dr-pooja-singh-831210238</a></p>
+    </section>
+  </main>
+
+  <footer>
+    © 2025&nbsp;Pooja Purshottam Singh. All rights reserved.
+  </footer>
+
+</body>
+</html>
